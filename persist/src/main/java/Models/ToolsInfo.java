@@ -1,6 +1,6 @@
-package Models;
+package models;
 
-import Entity.catalog.Tools;
+import entity.catalog.Tools;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class ToolsInfo {

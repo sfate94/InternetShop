@@ -1,4 +1,4 @@
-package Entity.order;
+package entity.order;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package Entity.account;
+package entity.account;
 
 import java.io.Serializable;
 

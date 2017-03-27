@@ -1,4 +1,4 @@
-package Entity.catalog;
+package entity.catalog;
 
 import java.io.Serializable;
 

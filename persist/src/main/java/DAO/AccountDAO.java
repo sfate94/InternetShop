@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import Entity.account.Account;
+import entity.account.Account;
 
 public interface AccountDAO {
 

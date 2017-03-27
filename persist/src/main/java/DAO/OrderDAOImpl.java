@@ -1,9 +1,9 @@
-package DAO;
+package dao;
 
-import Entity.OrderDetail.OrderDetail;
-import Entity.catalog.Tools;
-import Entity.order.Order;
-import Models.*;
+import entity.orderDetail.OrderDetail;
+import entity.catalog.Tools;
+import entity.order.Order;
+import models.*;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;

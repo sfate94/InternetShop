@@ -1,7 +1,7 @@
-package Entity.OrderDetail;
+package entity.orderDetail;
 
-import Entity.catalog.Tools;
-import Entity.order.Order;
+import entity.catalog.Tools;
+import entity.order.Order;
 
 import java.io.Serializable;
 

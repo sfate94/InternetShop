@@ -1,8 +1,8 @@
-package DAO;
+package dao;
 
-import Entity.catalog.Tools;
-import Models.PaginationResult;
-import Models.ToolsInfo;
+import entity.catalog.Tools;
+import models.PaginationResult;
+import models.ToolsInfo;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;

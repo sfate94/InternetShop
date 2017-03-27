@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import Models.CartInfo;
+import models.CartInfo;
 
 import javax.servlet.http.HttpServletRequest;
 

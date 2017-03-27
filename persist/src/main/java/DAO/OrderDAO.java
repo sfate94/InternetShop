@@ -1,9 +1,9 @@
-package DAO;
+package dao;
 
-import Models.CartInfo;
-import Models.OrderDetailInfo;
-import Models.OrderInfo;
-import Models.PaginationResult;
+import models.CartInfo;
+import models.OrderDetailInfo;
+import models.OrderInfo;
+import models.PaginationResult;
 
 import java.util.List;
 

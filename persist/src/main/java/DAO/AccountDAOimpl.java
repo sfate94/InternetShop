@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import Entity.account.Account;
+import entity.account.Account;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
