@@ -11,8 +11,6 @@
 <body>
 
 
-<jsp:include page="_header.jsp" />
-<jsp:include page="_menu.jsp" />
 
 <div class="page-title">Shopping Cart Demo</div>
 

@@ -23,7 +23,7 @@ public class OrderDAOImpl implements OrderDAO {
     private SessionFactory sessionFactory;
 
     @Autowired
-    private ToolsDAO productDAO;
+    private ToolsDAO toolsDAO;
 
     private int getMaxOrderNum() {
         String sql = "Select max(o.orderNum) from " + Order.class.getName() + " o ";
@@ -63,11 +63,11 @@ public class OrderDAOImpl implements OrderDAO {
             detail.setId(UUID.randomUUID().toString());
             detail.setOrder(order);
             detail.setAmount(line.getAmount());
-            detail.setPrice(line.getProductInfo().getcost());
+            detail.setPrice(line.getToolsInfo().getcost());
             detail.setQuanity(line.getQuantity());
 
-            String toolsId = line.getProductInfo().gettoolsId();
-            Tools tools = this.productDAO.findTools(toolsId);
+            String toolsId = line.getToolsInfo().gettoolsId();
+            Tools tools = this.toolsDAO.findTools(toolsId);
             detail.setTools(tools);
 
             session.persist(detail);

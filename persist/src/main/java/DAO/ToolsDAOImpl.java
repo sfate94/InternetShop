@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import validator.ProductInfoValidator;
 
 @Transactional
 public class ToolsDAOImpl implements ToolsDAO {
@@ -18,19 +19,20 @@ public class ToolsDAOImpl implements ToolsDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public Tools findTools(String code) {
+    public Tools findTools(String toolsId) {
         Session session = sessionFactory.getCurrentSession();
         Criteria crit = session.createCriteria(Tools.class);
-        crit.add(Restrictions.eq("code", code));
+        crit.add(Restrictions.eq("toolsId", toolsId));
         return (Tools) crit.uniqueResult();
     }
 
+
     @Override
-    public ToolsInfo findToolsInfo(String toolsId) {
+    public PaginationResult<ToolsInfo> queryTools(int page, int maxResult, int maxNavigationPage) {
         return null;
     }
 
-    public ToolsInfo findProductInfo(String toolsId) {
+    public ToolsInfo findToolsInfo(String toolsId) {
         Tools tools = this.findTools(toolsId);
         if (tools == null) {
             return null;
@@ -40,19 +42,19 @@ public class ToolsDAOImpl implements ToolsDAO {
 
     @Override
     public void save(ToolsInfo toolsInfo) {
-        String code = toolsInfo.gettoolsId();
+        String toolsId = toolsInfo.gettoolsId();
 
         Tools tools = null;
 
         boolean isNew = false;
-        if (code != null) {
-           tools = this.findTools(code);
+        if (toolsId != null) {
+           tools = this.findTools(toolsId);
         }
         if (tools == null) {
             isNew = true;
             tools = new Tools();
         }
-        tools.settoolsId(code);
+        tools.settoolsId(toolsId);
         tools.setmodelId(toolsInfo.getmodelId());
         tools.settypeId(toolsInfo.gettypeId());
         tools.setcost(toolsInfo.getcost());
@@ -64,16 +66,14 @@ public class ToolsDAOImpl implements ToolsDAO {
         if (isNew) {
             this.sessionFactory.getCurrentSession().persist(tools);
         }
-        // If error in DB, Exceptions will be thrown out immediately
-        // Nếu có lỗi tại DB, ngoại lệ sẽ ném ra ngay lập tức
+
         this.sessionFactory.getCurrentSession().flush();
     }
 
     @Override
-    public PaginationResult<ToolsInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
-                                                     String likeName) {
+    public PaginationResult<ToolsInfo> queryTools(int page, int maxResult, int maxNavigationPage, String likeName) {
         String sql = "Select new " + ToolsInfo.class.getName() //
-                + "(p.code, p.name, p.price) " + " from "//
+                + "(p.toolsId, p.modelId, p.typeId, p.cost) " + " from "//
                 + Tools.class.getName() + " p ";
         if (likeName != null && likeName.length() > 0) {
             sql += " Where lower(p.name) like :likeName ";
@@ -87,11 +87,6 @@ public class ToolsDAOImpl implements ToolsDAO {
             query.setParameter("likeName", "%" + likeName.toLowerCase() + "%");
         }
         return new PaginationResult<ToolsInfo>(query, page, maxResult, maxNavigationPage);
-    }
-
-    @Override
-    public PaginationResult<ToolsInfo> queryProducts(int page, int maxResult, int maxNavigationPage) {
-        return queryProducts(page, maxResult, maxNavigationPage, null);
     }
 
 }

@@ -14,9 +14,6 @@ public class ToolsInfo {
     // Upload file.
     private CommonsMultipartFile fileData;
 
-    public ToolsInfo(String s, String getmodelId, String gettypeId, int getcost) {
-    }
-
     public ToolsInfo(Tools tools) {
         this.toolsId = tools.gettoolsId();
         this.modelId = tools.getmodelId();
@@ -24,7 +21,7 @@ public class ToolsInfo {
         this.cost = tools.getcost();
     }
 
-    public ToolsInfo(String code, String name, double price) {
+    public ToolsInfo(String toolsId, String modelId, String typeId, int cost) {
         this.toolsId = toolsId;
         this.modelId = modelId;
         this.typeId = typeId;
@@ -75,7 +72,7 @@ public class ToolsInfo {
         return newTools;
     }
 
-    public void setnewTools(boolean newProduct) {
+    public void setnewTools(boolean newTools) {
         this.newTools = newTools;
     }
 

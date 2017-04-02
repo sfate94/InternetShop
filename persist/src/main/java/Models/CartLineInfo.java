@@ -9,12 +9,12 @@ public class CartLineInfo {
         this.quantity = 0;
     }
 
-    public ToolsInfo getProductInfo() {
+    public ToolsInfo getToolsInfo() {
         return toolsInfo;
     }
 
-    public void setProductInfo(ToolsInfo productInfo) {
-        this.toolsInfo = productInfo;
+    public void setToolsInfo(ToolsInfo toolsInfo) {
+        this.toolsInfo = toolsInfo;
     }
 
     public int getQuantity() {
