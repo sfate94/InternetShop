@@ -1,4 +1,4 @@
-package client.config;
+package config;
 
 import authentication.MyDBAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;

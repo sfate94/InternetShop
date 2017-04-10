@@ -5,14 +5,12 @@
 
     <title>Tools Shop Online</title>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
+
 
 </head>
 <body>
 
 
-<jsp:include page="_header.jsp" />
-<jsp:include page="_menu.jsp" />
 
 <div class="page-title">Shopping Cart Demo</div>
 
