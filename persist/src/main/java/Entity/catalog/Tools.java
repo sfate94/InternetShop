@@ -2,11 +2,7 @@ package entity.catalog;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Model", //
@@ -24,6 +20,7 @@ public class Tools implements Serializable {
     private int weight;
     private int power;
     private int speed;
+    private byte[] image;
 
     @Id
     @Column(name = "Tools_ID", length = 50)
@@ -97,6 +94,16 @@ public class Tools implements Serializable {
 
     public void setspeed(int speed) {
         this.speed = speed;
+    }
+
+    @Lob
+    @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
 

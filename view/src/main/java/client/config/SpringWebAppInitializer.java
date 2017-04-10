@@ -1,9 +1,11 @@
-package config;
+package client.config;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+
+import client.config.ApplicationContextConfig;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -24,7 +26,6 @@ public class SpringWebAppInitializer implements WebApplicationInitializer {
 
 
         ContextLoaderListener contextLoaderListener = new ContextLoaderListener(appContext);
-
         servletContext.addListener(contextLoaderListener);
 
 

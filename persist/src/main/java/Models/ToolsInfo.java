@@ -21,11 +21,15 @@ public class ToolsInfo {
         this.cost = tools.getcost();
     }
 
-    public ToolsInfo(String toolsId, String modelId, String typeId, int cost) {
+    public ToolsInfo(String s, String getmodelId, String gettypeId, int getcost) {
         this.toolsId = toolsId;
         this.modelId = modelId;
         this.typeId = typeId;
         this.cost = cost;
+    }
+
+    public ToolsInfo() {
+
     }
 
     public String gettoolsId() {

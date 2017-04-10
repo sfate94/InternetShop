@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>Books Shop Online</title>
+    <title>Tools Shop Online</title>
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles.css">
 
@@ -11,6 +11,8 @@
 <body>
 
 
+<jsp:include page="_header.jsp" />
+<jsp:include page="_menu.jsp" />
 
 <div class="page-title">Shopping Cart Demo</div>
 

@@ -77,7 +77,7 @@ public class CartInfo {
         }
     }
 
-    public void removeProduct(ToolsInfo toolsInfo) {
+    public void removeTools(ToolsInfo toolsInfo) {
         CartLineInfo line = this.findLineByCode(toolsInfo.gettoolsId());
         if (line != null) {
             this.cartLines.remove(line);

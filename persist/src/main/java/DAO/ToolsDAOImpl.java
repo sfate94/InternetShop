@@ -32,6 +32,11 @@ public class ToolsDAOImpl implements ToolsDAO {
         return null;
     }
 
+    @Override
+    public PaginationResult<ToolsInfo> queryProducts(int page, int maxResult, int maxNavigationPage, String likeName) {
+        return null;
+    }
+
     public ToolsInfo findToolsInfo(String toolsId) {
         Tools tools = this.findTools(toolsId);
         if (tools == null) {
@@ -61,6 +66,9 @@ public class ToolsDAOImpl implements ToolsDAO {
 
         if (toolsInfo.getFileData() != null) {
             byte[] image = toolsInfo.getFileData().getBytes();
+            if (image != null && image.length > 0) {
+                tools.setImage(image);
+            }
 
         }
         if (isNew) {

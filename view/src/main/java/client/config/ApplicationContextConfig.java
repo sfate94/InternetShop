@@ -1,4 +1,4 @@
-package config;
+package client.config;
 
 import java.util.Properties;
 
@@ -23,7 +23,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("config.*")
+@ComponentScan("client")
 @EnableTransactionManagement
 
 @PropertySource("classpath:ds-hibernate-cfg.properties")
@@ -36,7 +36,7 @@ public class ApplicationContextConfig {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
-        rb.setBasenames(new String[] { "validator.properties" });
+        rb.setBasenames(new String[] { "resources" });
         return rb;
     }
 
@@ -49,7 +49,7 @@ public class ApplicationContextConfig {
     }
 
     // Config for Upload.
-    @Bean(name = "multipartResolver")
+   @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
         return commonsMultipartResolver;
