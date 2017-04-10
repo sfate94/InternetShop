@@ -1,3 +1,4 @@
+/*
 package config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
@@ -6,3 +7,4 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 public class SpringSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
 
 }
+*/

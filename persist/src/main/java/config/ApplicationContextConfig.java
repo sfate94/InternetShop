@@ -18,15 +18,16 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "controller")
 
-@PropertySource("classpath:ds-hibernate-cfg.properties")
+/*@PropertySource("classpath:ds-hibernate-cfg.properties")*/
 public class ApplicationContextConfig {
 
 
@@ -40,22 +41,16 @@ public class ApplicationContextConfig {
         return rb;
     }
 
-    @Bean(name = "viewResolver")
-    public InternalResourceViewResolver getViewResolver() {
+    @Bean
+    public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
         viewResolver.setPrefix("/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
 
-    // Config for Upload.
-   @Bean(name = "multipartResolver")
-    public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
-        return commonsMultipartResolver;
-    }
-
-    @Bean(name = "dataSource")
+   /* @Bean(name = "dataSource")
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("ds.database-driver"));
@@ -116,6 +111,6 @@ public class ApplicationContextConfig {
     public AccountDAO getAccountDAO()  {
         return new AccountDAOimpl();
     }
-
+*/
 
 }

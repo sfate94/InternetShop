@@ -12,4 +12,8 @@ public class MainController {
     public String home() {
         return "index";
     }
+    @RequestMapping("/403")
+    public String accessDenied() {
+        return "/403";
+    }
 }

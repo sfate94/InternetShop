@@ -1,3 +1,4 @@
+/*
 package config;
 
 import authentication.MyDBAuthenticationService;
@@ -45,4 +46,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
     }
-}
+}*/
