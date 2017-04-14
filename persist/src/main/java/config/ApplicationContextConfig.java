@@ -18,16 +18,15 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan(basePackages = "controller")
-
-/*@PropertySource("classpath:ds-hibernate-cfg.properties")*/
+@PropertySource("classpath:ds-hibernate-cfg.properties")
 public class ApplicationContextConfig {
 
 
@@ -37,7 +36,7 @@ public class ApplicationContextConfig {
     @Bean
     public ResourceBundleMessageSource messageSource() {
         ResourceBundleMessageSource rb = new ResourceBundleMessageSource();
-        rb.setBasenames(new String[] { "resources" });
+        rb.setBasenames("resources");
         return rb;
     }
 
@@ -50,7 +49,7 @@ public class ApplicationContextConfig {
         return viewResolver;
     }
 
-   /* @Bean(name = "dataSource")
+    @Bean(name = "dataSource")
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("ds.database-driver"));
@@ -63,8 +62,8 @@ public class ApplicationContextConfig {
         return dataSource;
     }
 
-    @Autowired
     @Bean(name = "sessionFactory")
+    @Autowired
     public SessionFactory getSessionFactory(DataSource dataSource) throws Exception {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
@@ -75,7 +74,7 @@ public class ApplicationContextConfig {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
         // Package contain entity classes
-        factoryBean.setPackagesToScan(new String[] { "entity" });
+        factoryBean.setPackagesToScan("entity");
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(properties);
         factoryBean.afterPropertiesSet();
@@ -88,10 +87,11 @@ public class ApplicationContextConfig {
     @Autowired
     @Bean(name = "transactionManager")
     public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
-
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
     }
+
     @Bean(name = "accountDAO")
     public AccountDAO getApplicantDAO() {
         return new AccountDAOimpl();
@@ -111,6 +111,6 @@ public class ApplicationContextConfig {
     public AccountDAO getAccountDAO()  {
         return new AccountDAOimpl();
     }
-*/
+
 
 }

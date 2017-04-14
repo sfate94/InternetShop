@@ -35,9 +35,9 @@ public class CartInfo {
         return this.cartLines;
     }
 
-    private CartLineInfo findLineByCode(String code) {
+    private CartLineInfo findLineByCode(String toolsId) {
         for (CartLineInfo line : this.cartLines) {
-            if (line.getToolsInfo().gettoolsId().equals(code)) {
+            if (line.getToolsInfo().getToolsId().equals(toolsId)) {
                 return line;
             }
         }
@@ -45,7 +45,7 @@ public class CartInfo {
     }
 
     public void addTools(ToolsInfo toolsInfo, int quantity) {
-        CartLineInfo line = this.findLineByCode(toolsInfo.gettoolsId());
+        CartLineInfo line = this.findLineByCode(toolsInfo.getToolsId());
 
         if (line == null) {
             line = new CartLineInfo();
@@ -65,8 +65,8 @@ public class CartInfo {
 
     }
 
-    public void updateTools(String code, int quantity) {
-        CartLineInfo line = this.findLineByCode(code);
+    public void updateTools(String toolsId, int quantity) {
+        CartLineInfo line = this.findLineByCode(toolsId);
 
         if (line != null) {
             if (quantity <= 0) {
@@ -78,7 +78,7 @@ public class CartInfo {
     }
 
     public void removeTools(ToolsInfo toolsInfo) {
-        CartLineInfo line = this.findLineByCode(toolsInfo.gettoolsId());
+        CartLineInfo line = this.findLineByCode(toolsInfo.getToolsId());
         if (line != null) {
             this.cartLines.remove(line);
         }
@@ -112,7 +112,7 @@ public class CartInfo {
         if (cartForm != null) {
             List<CartLineInfo> lines = cartForm.getCartLines();
             for (CartLineInfo line : lines) {
-                this.updateTools(line.getToolsInfo().gettoolsId(), line.getQuantity());
+                this.updateTools(line.getToolsInfo().getToolsId(), line.getQuantity());
             }
         }
 

@@ -5,9 +5,16 @@ h3 {
     margin: 0px;
     padding: 0px;
 }
+.container {
+    width: 100%;
+    max-width: 1260px;
+    min-width: 780px;
+
+    margin: 0 auto;
+}
 body {
-    max-width: 860px;
-    min-width: 360px;
+    max-width: 100%;
+    min-width: 100%;
     margin: 0px auto;
     background: #F8F8F8;
     padding:0px 5px;
@@ -59,9 +66,9 @@ body {
     padding: 5px;
 }
 
-.container  {
+/*.container  {
     margin: 5px 0px;
-}
+}*/
 
 .demo-container, .login-container, .account-container {
     padding: 5px;

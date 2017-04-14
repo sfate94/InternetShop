@@ -9,8 +9,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "Type_Tools", //
-        uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
+@Table(name = "type_tools", //
+        uniqueConstraints = { @UniqueConstraint(columnNames = "Type_ID") })
 public class TypeTools implements Serializable {
 
     private static final long serialVersionUID = -2576670215015463100L;
@@ -21,19 +21,19 @@ public class TypeTools implements Serializable {
 
     @Id
     @Column(name = "Type_ID", length = 50)
-    public String gettypeId() {
+    public String getTypeId() {
         return typeId;
     }
 
-    public void settypeId(String typeId) {
+    public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
     @Column(name = "TypeName",length = 150, nullable = false)
-    public String gettypeName() {
+    public String getTypeName() {
         return typeName;
     }
 
-    public void settypeName(String typeName) {
+    public void setTypeName(String typeName) {
         this.typeName = typeName;
     }
 

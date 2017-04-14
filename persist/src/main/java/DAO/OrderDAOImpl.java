@@ -63,10 +63,10 @@ public class OrderDAOImpl implements OrderDAO {
             detail.setId(UUID.randomUUID().toString());
             detail.setOrder(order);
             detail.setAmount(line.getAmount());
-            detail.setPrice(line.getToolsInfo().getcost());
+            detail.setPrice(line.getToolsInfo().getCost());
             detail.setQuanity(line.getQuantity());
 
-            String toolsId = line.getToolsInfo().gettoolsId();
+            String toolsId = line.getToolsInfo().getToolsId();
             Tools tools = this.toolsDAO.findTools(toolsId);
             detail.setTools(tools);
 

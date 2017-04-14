@@ -4,22 +4,38 @@ import entity.catalog.Tools;
 import models.PaginationResult;
 import models.ToolsInfo;
 
+import java.util.List;
+
 public interface ToolsDAO {
 
 
+    Tools findTools(String toolsId);
 
-    public Tools findTools(String toolsId);
+    ToolsInfo findToolsInfo(String toolsId);
 
-    public ToolsInfo findToolsInfo(String toolsId) ;
+ /*   public Tools findTools(String toolsId);
 
+    public ToolsInfo findToolsInfo(String toolsId) ;*/
 
-    public PaginationResult<ToolsInfo> queryTools(int page,
-                                                       int maxResult, int maxNavigationPage  );
+    List<Tools> queryTools(int page,
+                               int maxResult, int maxNavigationPage  );
 
-    public PaginationResult<ToolsInfo> queryProducts(int page, int maxResult,
+   List<Tools> queryTools(int page, int maxResult,
                                                        int maxNavigationPage, String likeName);
 
-    public void save(ToolsInfo productInfo);
+    public void save(ToolsInfo toolsInfo);
 
-    PaginationResult<ToolsInfo> queryTools(int page, int maxResult, int maxNavigationPage, String likeName);
+ /*   public PaginationResult<ToolsInfo> queryTools(int page, int maxResult, int maxNavigationPage, String likeName);
+
+    *//*@Override
+        public void save(ToolsInfo toolsInfo) {
+
+        }
+
+        @Override
+        public PaginationResult<ToolsInfo> queryTools(int page, int maxResult, int maxNavigationPage, String likeName) {
+            return null;
+        }
+    *//*
+    PaginationResult<ToolsInfo> queryProducts(int page, int maxResult, int maxNavigationPage);*/
 }

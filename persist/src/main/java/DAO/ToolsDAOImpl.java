@@ -1,5 +1,6 @@
 package dao;
 
+import entity.catalog.Model;
 import entity.catalog.Tools;
 import models.PaginationResult;
 import models.ToolsInfo;
@@ -9,9 +10,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import validator.ProductInfoValidator;
 
+import java.util.Date;
+import java.util.List;
+
+@Repository
 @Transactional
 public class ToolsDAOImpl implements ToolsDAO {
 
@@ -26,75 +32,71 @@ public class ToolsDAOImpl implements ToolsDAO {
         return (Tools) crit.uniqueResult();
     }
 
-
     @Override
-    public PaginationResult<ToolsInfo> queryTools(int page, int maxResult, int maxNavigationPage) {
-        return null;
-    }
-
-    @Override
-    public PaginationResult<ToolsInfo> queryProducts(int page, int maxResult, int maxNavigationPage, String likeName) {
-        return null;
-    }
-
     public ToolsInfo findToolsInfo(String toolsId) {
         Tools tools = this.findTools(toolsId);
         if (tools == null) {
             return null;
         }
-        return new ToolsInfo(tools.gettoolsId(), tools.getmodelId(), tools.gettypeId(), tools.getcost());
+        return new ToolsInfo(tools.getToolsId(), tools.getModelId(), tools.getTypeId(), tools.getCost(),tools.getLength(),tools.getHeight(),tools.getWeight(),tools.getPower(),tools.getSpeed());
     }
 
     @Override
     public void save(ToolsInfo toolsInfo) {
-        String toolsId = toolsInfo.gettoolsId();
-
+        String toolsId = toolsInfo.getToolsId();
         Tools tools = null;
-
         boolean isNew = false;
         if (toolsId != null) {
-           tools = this.findTools(toolsId);
+            tools = this.findTools(toolsId);
         }
         if (tools == null) {
             isNew = true;
             tools = new Tools();
         }
-        tools.settoolsId(toolsId);
-        tools.setmodelId(toolsInfo.getmodelId());
-        tools.settypeId(toolsInfo.gettypeId());
-        tools.setcost(toolsInfo.getcost());
+        tools.setToolsId(toolsId);
+        tools.setModelId(toolsInfo.getModelId());
+        tools.setTypeId(toolsInfo.getTypeId());
+        tools.setCost(toolsInfo.getCost());
+        tools.setLength(toolsInfo.getLenght());
+        tools.setHeight(toolsInfo.getHeight());
+        tools.setWeight(toolsInfo.getWeight());
+        tools.setPower(toolsInfo.getPower());
+        tools.setSpeed(toolsInfo.getSpeed());
 
-        if (toolsInfo.getFileData() != null) {
+        /*if (toolsInfo.getFileData() != null) {
             byte[] image = toolsInfo.getFileData().getBytes();
             if (image != null && image.length > 0) {
                 tools.setImage(image);
             }
-
-        }
+        }*/
         if (isNew) {
             this.sessionFactory.getCurrentSession().persist(tools);
         }
-
         this.sessionFactory.getCurrentSession().flush();
     }
 
     @Override
-    public PaginationResult<ToolsInfo> queryTools(int page, int maxResult, int maxNavigationPage, String likeName) {
-        String sql = "Select new " + ToolsInfo.class.getName() //
-                + "(p.toolsId, p.modelId, p.typeId, p.cost) " + " from "//
+    public List<Tools> queryTools(int page, int maxResult, int maxNavigationPage,
+                                      String likeName) {
+        /*String sql = "Select new " + ToolsInfo.class.getName() //
+                + "(p.code, p.name, p.price) " + " from "//
                 + Tools.class.getName() + " p ";
         if (likeName != null && likeName.length() > 0) {
             sql += " Where lower(p.name) like :likeName ";
         }
-        sql += " order by p.createDate desc ";
-        //
-        Session session = sessionFactory.getCurrentSession();
 
         Query query = session.createQuery(sql);
         if (likeName != null && likeName.length() > 0) {
             query.setParameter("likeName", "%" + likeName.toLowerCase() + "%");
-        }
-        return new PaginationResult<ToolsInfo>(query, page, maxResult, maxNavigationPage);
+        }*/
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(Tools.class);
+        return (List<Tools>) criteria.list();
+    }
+
+    @Override
+    public List<Tools> queryTools(int page, int maxResult, int maxNavigationPage) {
+        return queryTools(page, maxResult, maxNavigationPage, null);
     }
 
 }

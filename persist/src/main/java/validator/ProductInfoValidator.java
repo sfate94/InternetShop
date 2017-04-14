@@ -25,19 +25,19 @@ public class ProductInfoValidator implements Validator {
         ToolsInfo toolsInfo = (ToolsInfo) target;
 
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "toolsId", "NotEmpty.productForm.code");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "modelId", "NotEmpty.productForm.name");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "typeId", "NotEmpty.productForm.price");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cost", "NotEmpty.productForm.price");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "toolsId", "NotEmpty.productForm.toolsId");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "modelId", "NotEmpty.productForm.modelId");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "typeId", "NotEmpty.productForm.typeId");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cost", "NotEmpty.productForm.cost");
 
-        String code = toolsInfo.gettoolsId();
-        if (code != null && code.length() > 0) {
-            if (code.matches("\\s+")) {
-                errors.rejectValue("code", "Pattern.productForm.code");
+        String toolsId = toolsInfo.getToolsId();
+        if (toolsId != null && toolsId.length() > 0) {
+            if (toolsId.matches("\\s+")) {
+                errors.rejectValue("toolsId", "Pattern.productForm.toolsId");
             } else if(toolsInfo.isnewTools()) {
-                Tools tools = toolsDAO.findTools(code);
+                Tools tools = toolsDAO.findTools(toolsId);
                 if (tools != null) {
-                    errors.rejectValue("code", "Duplicate.productForm.code");
+                    errors.rejectValue("toolsId", "Duplicate.productForm.toolsId");
                 }
             }
         }

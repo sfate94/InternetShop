@@ -1,12 +1,13 @@
 package entity.catalog;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Model", //
-        uniqueConstraints = { @UniqueConstraint(columnNames = "ID") })
+@Table(name = "tools", //
+        uniqueConstraints = { @UniqueConstraint(columnNames = "Tools_ID") })
 public class Tools implements Serializable {
 
     private static final long serialVersionUID = -2576670215015463100L;
@@ -14,6 +15,7 @@ public class Tools implements Serializable {
     private String toolsId;
     private String modelId;
     private String typeId;
+    private  Model model;
     private int cost;
     private int length;
     private int height;
@@ -24,87 +26,86 @@ public class Tools implements Serializable {
 
     @Id
     @Column(name = "Tools_ID", length = 50)
-    public String gettoolsId() {
+    public String getToolsId() {
         return toolsId;
     }
 
-    public void settoolsId(String toolsId) {
+    public void setToolsId(String toolsId) {
         this.toolsId = toolsId;
     }
     @Column(name = "Model_ID", length = 50,nullable = false)
-    public String getmodelId() {
+    public String getModelId() {
         return modelId;
     }
 
-    public void setmodelId(String modelId) {
+    public void setModelId(String modelId) {
         this.modelId = modelId;
     }
     @Column(name = "Type_ID", length = 50,nullable = false)
-    public String gettypeId() {
+    public String getTypeId() {
         return typeId;
     }
 
-    public void settypeId(String typeId) {
+    /*@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Model_ID", nullable = false, //
+            foreignKey = @ForeignKey(name = "Model_ID"))
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }*/
+
+    public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
     @Column(name = "Cost", nullable = false)
-    public int getcost() {
+    public int getCost() {
         return cost;
     }
 
-    public void setcost(int cost) {
+    public void setCost(int cost) {
         this.cost = cost;
     }
-    @Column(name = "Lenght", nullable = false)
-    public int getlenght() {
+    @Column(name = "Length", nullable = false)
+    public int getLength() {
         return length;
     }
 
-    public void setlenght(int lenght) {
-        this.length = lenght;
+    public void setLength(int length) {
+        this.length = length;
     }
     @Column(name = "Height", nullable = false)
-    public int getheight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setheight(int height) {
+    public void setHeight(int height) {
         this.height = height;
     }
     @Column(name = "Weight", nullable = false)
-    public int getweight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setweight(int weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
     @Column(name = "Power", nullable = false)
-    public int getpower() {
+    public int getPower() {
         return power;
     }
 
-    public void setpower(int power) {
+    public void setPower(int power) {
         this.power = power;
     }
     @Column(name = "Speed", nullable = false)
-    public int getspeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setspeed(int speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
-
-    @Lob
-    @Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-
-    }
+}
