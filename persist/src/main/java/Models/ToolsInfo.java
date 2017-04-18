@@ -4,9 +4,11 @@ import entity.catalog.Tools;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class ToolsInfo {
     private String toolsId;
-    private String modelId;
+    private DeviceModel deviceModel;
+    private TypeToolsInfo typeToolsInfo;
     private String typeId;
     private int cost;
+
     private int length;
     private int height;
     private int weight;
@@ -19,8 +21,8 @@ public class ToolsInfo {
 
     public ToolsInfo(Tools tools) {
         this.toolsId = tools.getToolsId();
-        this.modelId = tools.getModelId();
-        this.typeId = tools.getTypeId();
+        this.typeToolsInfo = new TypeToolsInfo(tools.getTypeTools());
+        this.deviceModel = new DeviceModel(tools.getModel());
         this.cost = tools.getCost();
         this.length = tools.getLength();
         this.height = tools.getHeight();
@@ -29,20 +31,7 @@ public class ToolsInfo {
         this.speed = tools.getSpeed();
     }
 
-    public ToolsInfo(String toolsId, String modelId, String typeId, int cost, int length, int height, int weight, int power, int speed) {
-        this.toolsId = toolsId;
-        this.modelId = modelId;
-        this.typeId = typeId;
-        this.cost = cost;
-        this.length = length;
-        this.height = height;
-        this.weight = weight;
-        this.power = power;
-        this.speed = speed;
-    }
-
     public ToolsInfo() {
-
     }
 
     public String getToolsId() {
@@ -51,14 +40,6 @@ public class ToolsInfo {
 
     public void setToolsId(String toolsId) {
         this.toolsId = toolsId;
-    }
-
-    public String getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(String modelId) {
-        this.modelId = modelId;
     }
 
     public String getTypeId() {
@@ -93,12 +74,12 @@ public class ToolsInfo {
         this.newTools = newTools;
     }
 
-    public int getLenght() {
+    public int getLength() {
         return length;
     }
 
-    public void setLenght(int lenght) {
-        this.length = lenght;
+    public void setLength(int length) {
+        this.length = length;
     }
 
     public int getHeight() {
@@ -133,4 +114,19 @@ public class ToolsInfo {
         this.speed = speed;
     }
 
+    public DeviceModel getDeviceModel() {
+        return deviceModel;
+    }
+
+    public void setDeviceModel(DeviceModel deviceModel) {
+        this.deviceModel = deviceModel;
+    }
+
+    public TypeToolsInfo getTypeToolsInfo() {
+        return typeToolsInfo;
+    }
+
+    public void setTypeToolsInfo(TypeToolsInfo typeToolsInfo) {
+        this.typeToolsInfo = typeToolsInfo;
+    }
 }

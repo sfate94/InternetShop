@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tools Shop Online</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="../../resources/css/styles.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
     <h3>Demo content</h3>
 
     <ul>
-        <li>Buy online</li>
+        <li>Buy online hhhhh</li>
         <li>Admin pages</li>
         <li>Reports</li>
     </ul>

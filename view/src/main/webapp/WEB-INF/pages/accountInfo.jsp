@@ -8,7 +8,7 @@
 
     <title>Account Info</title>
 
-    <link rel="stylesheet" type="text/css" href="<c:url value="../../resources/css/styles.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>">
 
 </head>
 <body>

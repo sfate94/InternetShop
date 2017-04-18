@@ -1,4 +1,4 @@
-package config;
+package configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -29,14 +29,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         // Add other converters ...
     }
 
-    // Static Resource Config
-    // equivalents for <mvc:resources/> tags
-    @Override
+   @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
+       registry.addResourceHandler("css/**").addResourceLocations("/css/");
+   }
 
-    // equivalent for <mvc:default-servlet-handler/> tag
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

@@ -13,8 +13,7 @@ public class Tools implements Serializable {
     private static final long serialVersionUID = -2576670215015463100L;
 
     private String toolsId;
-    private String modelId;
-    private String typeId;
+    private TypeTools typeTools;
     private  Model model;
     private int cost;
     private int length;
@@ -33,20 +32,36 @@ public class Tools implements Serializable {
     public void setToolsId(String toolsId) {
         this.toolsId = toolsId;
     }
-    @Column(name = "Model_ID", length = 50,nullable = false)
+   /* @Column(name = "Model_ID", length = 50,nullable = false)
     public String getModelId() {
         return modelId;
     }
 
     public void setModelId(String modelId) {
         this.modelId = modelId;
-    }
-    @Column(name = "Type_ID", length = 50,nullable = false)
+    }*/
+
+    /*@Column(name = "Type_ID", length = 50,nullable = false)
     public String getTypeId() {
         return typeId;
     }
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }*/
 
-    /*@OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name = "Type_ID", nullable = false, //
+            foreignKey = @ForeignKey(name = "Type_ID"))
+    public TypeTools getTypeTools() {
+        return typeTools;
+    }
+
+    public void setTypeTools(TypeTools typeTools) {
+        this.typeTools = typeTools;
+    }
+
+
+    @OneToOne
     @JoinColumn(name = "Model_ID", nullable = false, //
             foreignKey = @ForeignKey(name = "Model_ID"))
     public Model getModel() {
@@ -55,11 +70,9 @@ public class Tools implements Serializable {
 
     public void setModel(Model model) {
         this.model = model;
-    }*/
-
-    public void setTypeId(String typeId) {
-        this.typeId = typeId;
     }
+
+
     @Column(name = "Cost", nullable = false)
     public int getCost() {
         return cost;

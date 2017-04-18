@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Product List</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="../../resources/css/styles.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>">
 </head>
 <body>
 
@@ -27,15 +27,14 @@
             <li><img class="product-image"
                      src="${pageContext.request.contextPath}/toolsImage?toolsId=${prodInfo.toolsId}" /></li>
             <li>ToolsId: ${prodInfo.toolsId}</li>
-            <li>ModelId: ${prodInfo.modelId}</li>
-            <li>TypeId: ${prodInfo.typeId}</li>
-           <%-- <li>ModelName: ${prodInfo.modelName}</li>--%>
+            <li>ToolsName: ${prodInfo.typeToolsInfo.typeName}</li>
+            <li>ModelName: ${prodInfo.deviceModel.modelName}</li>
             <li>Cost: <fmt:formatNumber value="${prodInfo.cost}" type="currency"/></li>
-            <li>Length: <fmt:formatNumber value="${prodInfo.cost}" type="number"/></li>
-            <li>Height: ${prodInfo.height}</li>
-            <li>Weight: ${prodInfo.weight}</li>
-            <li>Power: ${prodInfo.power}</li>
-            <li>Speed: ${prodInfo.speed}</li>
+            <li>Length: <fmt:formatNumber value="${prodInfo.length}" type="number"/> Sm</li>
+            <li>Height: <fmt:formatNumber value="${prodInfo.height}" type="number"/> Sm</li>
+            <li>Weight: <fmt:formatNumber value="${prodInfo.weight}" type="number"/> Gr</li>
+            <li>Power: <fmt:formatNumber value="${prodInfo.power}" type="number"/> W</li>
+            <li>Speed: <fmt:formatNumber value="${prodInfo.speed}" type="number"/> Ob/min</li>
             <li><a
                     href="${pageContext.request.contextPath}/buyProduct?toolsId=${prodInfo.toolsId}">
                 Buy Now</a></li>

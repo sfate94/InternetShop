@@ -8,7 +8,7 @@
 
     <title>Shopping Cart Confirmation</title>
 
-    <link rel="stylesheet" type="text/css" href="<c:url value="../../resources/css/styles.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>">
 
 </head>
 <body>
@@ -66,8 +66,9 @@
                 <li>ToolsId: ${cartLineInfo.toolsInfo.toolsId} <input
                         type="hidden" name="toolsId" value="${cartLineInfo.toolsInfo.toolsId}" />
                 </li>
-                <li>ModelId: ${cartLineInfo.toolsInfo.modelId}</li>
-                    <li>TypeId: ${cartLineInfo.toolsInfo.typeId}</li>
+                    <li>ToolsName: ${cartLineInfo.toolsInfo.typeToolsInfo.typeName}</li>
+                    <li>ModelName: ${cartLineInfo.toolsInfo.deviceModel.modelName}</li>
+
                 <li>Cost: <span class="cost">
                      <fmt:formatNumber value="${cartLineInfo.toolsInfo.cost}" type="currency"/>
                   </span>

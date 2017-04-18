@@ -24,6 +24,7 @@ import validator.CustomerInfoValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -80,8 +81,12 @@ public class MainController {
 
         List<Tools> result = toolsDAO.queryTools(page,
                 maxResult, maxNavigationPage, likeName);
-
-        model.addAttribute("paginationProducts", result);
+        List<ToolsInfo> toolsInfos = new ArrayList<>();
+        for (Tools tools: result){
+            ToolsInfo tool = new ToolsInfo(tools);
+            toolsInfos.add(tool);
+        }
+        model.addAttribute("paginationProducts", toolsInfos);
         return "productList";
     }
     @RequestMapping({ "/buyProduct" })

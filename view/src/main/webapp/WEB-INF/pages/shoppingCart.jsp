@@ -9,7 +9,7 @@
 
     <title>Shopping Cart</title>
 
-    <link rel="stylesheet" type="text/css" href="<c:url value="../../resources/css/styles.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css"/>">
 
 </head>
 <body>
@@ -42,8 +42,7 @@
                             path="cartLines[${varStatus.index}].toolsInfo.toolsId" />
 
                     </li>
-                    <li>ModelId: ${cartLineInfo.toolsInfo.modelId}</li>
-                        <li>TypeId: ${cartLineInfo.toolsInfo.typeId}</li>
+                    <li>ModelName: ${cartLineInfo.toolsInfo.deviceModel.modelName}</li>
                     <li>Cost: <span class="cost">
 
                          <fmt:formatNumber value="${cartLineInfo.toolsInfo.cost}" type="currency"/>

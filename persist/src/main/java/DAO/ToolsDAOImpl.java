@@ -38,12 +38,12 @@ public class ToolsDAOImpl implements ToolsDAO {
         if (tools == null) {
             return null;
         }
-        return new ToolsInfo(tools.getToolsId(), tools.getModelId(), tools.getTypeId(), tools.getCost(),tools.getLength(),tools.getHeight(),tools.getWeight(),tools.getPower(),tools.getSpeed());
+        return new ToolsInfo(tools);
     }
 
     @Override
     public void save(ToolsInfo toolsInfo) {
-        String toolsId = toolsInfo.getToolsId();
+        /*String toolsId = toolsInfo.getToolsId();
         Tools tools = null;
         boolean isNew = false;
         if (toolsId != null) {
@@ -62,22 +62,22 @@ public class ToolsDAOImpl implements ToolsDAO {
         tools.setWeight(toolsInfo.getWeight());
         tools.setPower(toolsInfo.getPower());
         tools.setSpeed(toolsInfo.getSpeed());
-
+*/
         /*if (toolsInfo.getFileData() != null) {
             byte[] image = toolsInfo.getFileData().getBytes();
             if (image != null && image.length > 0) {
                 tools.setImage(image);
             }
         }*/
-        if (isNew) {
+      /*  if (isNew) {
             this.sessionFactory.getCurrentSession().persist(tools);
         }
-        this.sessionFactory.getCurrentSession().flush();
+        this.sessionFactory.getCurrentSession().flush();*/
     }
 
     @Override
     public List<Tools> queryTools(int page, int maxResult, int maxNavigationPage,
-                                      String likeName) {
+                                  String likeName) {
         /*String sql = "Select new " + ToolsInfo.class.getName() //
                 + "(p.code, p.name, p.price) " + " from "//
                 + Tools.class.getName() + " p ";
