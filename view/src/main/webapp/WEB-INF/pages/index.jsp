@@ -18,7 +18,7 @@
     <h3>Demo content</h3>
 
     <ul>
-        <li>Buy online hhhhh</li>
+        <li>Buy online</li>
         <li>Admin pages</li>
         <li>Reports</li>
     </ul>

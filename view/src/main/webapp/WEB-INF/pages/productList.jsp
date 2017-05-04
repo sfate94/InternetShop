@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
@@ -12,20 +12,37 @@
 </head>
 <body>
 
-<jsp:include page="_header.jsp" />
-<jsp:include page="_menu.jsp" />
+<jsp:include page="_header.jsp"/>
+<jsp:include page="_menu.jsp"/>
 
 <fmt:setLocale value="en_US" scope="session"/>
 
-<div class="page-title">Product List</div>
-
-
+<div class="page-title">Product List
+</div>
+<div class="display_block">
+    <div class="filter_container">
+        <label for="modelFilter">Model Filter: </label>
+        <select id="modelFilter">
+            <option>All Tools</option>
+            <option>Bolgarki</option>
+            <option>Frezeri</option>
+            <option>Shyrypoverti</option>
+        </select>
+    </div>
+    <div class="currency_container">
+        <iframe src="http://www.nbrb.by/publications/wmastersd.asp?
+            lan=en&datatype=0&fnt=Times&fntsize=13&fntcolor=005c7b&lnkcolor=fc7f7f&bgcolor=fdf2e0&brdcolor=fdf2e0"
+                width=190 height=95 frameborder=0 scrolling=no>
+        </iframe>
+    </div>
+</div>
 
 <c:forEach items="${paginationProducts}" var="prodInfo">
     <div class="product-preview-container">
         <ul>
+
             <li><img class="product-image"
-                     src="${pageContext.request.contextPath}/toolsImage?toolsId=${prodInfo.toolsId}" /></li>
+                     src="data:image/jpg;base64, ${prodInfo.base64Image}"/></li>
             <li>ToolsId: ${prodInfo.toolsId}</li>
             <li>ToolsName: ${prodInfo.typeToolsInfo.typeName}</li>
             <li>ModelName: ${prodInfo.deviceModel.modelName}</li>
@@ -39,33 +56,25 @@
                     href="${pageContext.request.contextPath}/buyProduct?toolsId=${prodInfo.toolsId}">
                 Buy Now</a></li>
             <!-- For Manager edit Product -->
-            <security:authorize  access="hasRole('ROLE_MANAGER')">
+            <security:authorize access="hasRole('ROLE_MANAGER')">
                 <li><a style="color:red;"
-                       href="${pageContext.request.contextPath}/tools?toolsId=${toolsInfo.toolsId}">
+                       href="${pageContext.request.contextPath}/product?toolsId=${prodInfo.toolsId}">
                     Edit Tools</a></li>
             </security:authorize>
         </ul>
     </div>
 
 </c:forEach>
-<br/>
+<div class="pagin">
+<c:if test="${page>0}">
+    <a href="${pageContext.request.contextPath}/productList?page=${page-1}">Previous</a>
+</c:if>
+<c:if test="${(page+1)*maxResult<count}">
+    <a href="${pageContext.request.contextPath}/productList?page=${page+1}">Next</a>
+</c:if>
+</div>
 
-
-<%--<c:if test="${paginationProducts.totalPages > 1}">
-    <div class="page-navigator">
-        <c:forEach items="${paginationProducts.navigationPages}" var = "page">
-            <c:if test="${page != -1 }">
-                <a href="productList?page=${page}" class="nav-item">${page}</a>
-            </c:if>
-            <c:if test="${page == -1 }">
-                <span class="nav-item"> ... </span>
-            </c:if>
-        </c:forEach>
-
-    </div>
-</c:if>--%>
-
-<jsp:include page="_footer.jsp" />
+<jsp:include page="_footer.jsp"/>
 
 </body>
 </html>

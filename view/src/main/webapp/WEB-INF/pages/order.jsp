@@ -1,4 +1,4 @@
-%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
@@ -50,7 +50,7 @@
         <tr>
             <td>${orderDetailInfo.productCode}</td>
             <td>${orderDetailInfo.productName}</td>
-            <td>${orderDetailInfo.quanity}</td>
+            <td>${orderDetailInfo.quantity}</td>
             <td>
                 <fmt:formatNumber value="${orderDetailInfo.price}" type="currency"/>
             </td>

@@ -21,7 +21,6 @@
 
 <form:form method="POST" modelAttribute="customerForm"
            action="${pageContext.request.contextPath}/shoppingCartCustomer">
-
     <table>
         <tr>
             <td>Name *</td>
@@ -37,7 +36,7 @@
 
         <tr>
             <td>Phone *</td>
-            <td><form:input path="phone" /></td>
+            <td><form:input path="phone" id="form_1" /></td>
             <td><form:errors path="phone" class="error-message" /></td>
         </tr>
 
@@ -58,6 +57,8 @@
 
 
 <jsp:include page="_footer.jsp" />
+<script src="<c:url value="/js/lib/jquery-3.2.1.min.js"/>"></script>
+<script src="<c:url value="/js/productValidator.js"/>"></script>
 
 
 </body>

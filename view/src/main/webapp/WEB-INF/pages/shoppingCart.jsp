@@ -35,8 +35,8 @@
                    varStatus="varStatus">
             <div class="product-preview-container">
                 <ul>
-                    <%--<li><img class="product-image"
-                             src="${pageContext.request.contextPath}/productImage?code=${cartLineInfo.productInfo.code}" />--%>
+                    <li><img class="product-image"
+                             src="data:image/jpg;base64, ${cartLineInfo.toolsInfo.base64Image}" />
                     </li>
                     <li>ToolsId: ${cartLineInfo.toolsInfo.toolsId} <form:hidden
                             path="cartLines[${varStatus.index}].toolsInfo.toolsId" />

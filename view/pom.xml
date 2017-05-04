@@ -20,11 +20,6 @@
             <artifactId>persist</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.netcracker</groupId>
-            <artifactId>controller</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
     <build>

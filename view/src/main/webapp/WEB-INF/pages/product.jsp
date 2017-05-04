@@ -33,7 +33,7 @@
                     ${productForm.toolsId}
                 </c:if>
                 <c:if test="${empty productForm.toolsId}">
-                    <form:input path="tools" />
+                    <form:input path="toolsId" />
                     <form:hidden path="newTools" />
                 </c:if>
             </td>
@@ -41,9 +41,27 @@
         </tr>
 
         <tr>
-            <td>ModelId *</td>
-            <td><form:input path="modelId" /></td>
-            <td><form:errors path="modelId" class="error-message" /></td>
+            <td>TypeName *</td>
+            <td>
+                <form:select id="typeSelector" path="typeToolsInfo.typeId">
+                    <c:forEach items="${types}" var="type">
+                        <form:option value="${type.typeId}" label="${type.typeName}"/>
+                    </c:forEach>
+                </form:select>
+            </td>
+            <td><form:errors path="typeToolsInfo.typeId" class="error-message" /></td>
+        </tr>
+
+        <tr>
+            <td>ModelName *</td>
+            <td>
+                <form:select id="modelSelector" path="deviceModel.modelId">
+                    <c:forEach items="${models}" var="model">
+                        <form:option value="${model.modelId}" label="${model.modelName}"/>
+                    </c:forEach>
+                </form:select>
+            </td>
+            <td><form:errors path="deviceModel.modelId" class="error-message" /></td>
         </tr>
 
         <tr>
@@ -51,10 +69,41 @@
             <td><form:input path="cost" /></td>
             <td><form:errors path="cost" class="error-message" /></td>
         </tr>
+
+        <tr>
+            <td>Height *</td>
+            <td><form:input path="height" /></td>
+            <td><form:errors path="height" class="error-message" /></td>
+        </tr>
+
+        <tr>
+            <td>Weight *</td>
+            <td><form:input path="weight" /></td>
+            <td><form:errors path="weight" class="error-message" /></td>
+        </tr>
+
+        <tr>
+            <td>Length *</td>
+            <td><form:input path="length" /></td>
+            <td><form:errors path="length" class="error-message" /></td>
+        </tr>
+
+        <tr>
+            <td>Power *</td>
+            <td><form:input path="power" /></td>
+            <td><form:errors path="power" class="error-message" /></td>
+        </tr>
+
+        <tr>
+            <td>Speed *</td>
+            <td><form:input path="speed" /></td>
+            <td><form:errors path="speed" class="error-message" /></td>
+        </tr>
+
         <tr>
             <td>Image</td>
             <td>
-                <img src="${pageContext.request.contextPath}/toolsImage?toolsId=${productForm.toolsId}" width="100"/></td>
+                <img src="data:image/jpg;base64, ${productForm.base64Image}" width="100"/></td>
             <td> </td>
         </tr>
         <tr>
@@ -66,8 +115,12 @@
 
         <tr>
             <td>&nbsp;</td>
-            <td><input type="submit" value="Submit" /> <input type="reset"
-                                                              value="Reset" /></td>
+            <td><input type="submit" value="Submit" />
+               <form action="/productList/">
+                    <button type="submit">Cancel</button>
+                </form>
+            </td>
+
         </tr>
     </table>
 </form:form>
@@ -76,6 +129,7 @@
 
 
 <jsp:include page="_footer.jsp" />
-
+<script src="<c:url value="/js/lib/jquery-3.2.1.min.js"/>"></script>
+<script src="<c:url value="/js/product.js"/>"></script>
 </body>
 </html>

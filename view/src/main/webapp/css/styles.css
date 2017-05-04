@@ -65,11 +65,6 @@ body {
     margin:10px 10px 10px 0px;
     padding: 5px;
 }
-
-/*.container  {
-    margin: 5px 0px;
-}*/
-
 .demo-container, .login-container, .account-container {
     padding: 5px;
     border: 1px solid #ccc;
@@ -146,4 +141,22 @@ ul {
 
 table td {
     padding: 5px;
+}
+
+.display_block {
+    display: block;
+}
+
+.filter_container {
+    display: inline-block; float: left;
+}
+
+.currency_container {
+    display: inline-block;
+    float: right;
+    margin-right: 50px;
+}
+
+.pagin {
+    text-align: center;
 }
