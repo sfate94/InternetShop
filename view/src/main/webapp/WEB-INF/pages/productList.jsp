@@ -23,10 +23,10 @@
     <div class="filter_container">
         <label for="modelFilter">Model Filter: </label>
         <select id="modelFilter">
-            <option>All Tools</option>
-            <option>Bolgarki</option>
-            <option>Frezeri</option>
-            <option>Shyrypoverti</option>
+            <option value="0">All Tools</option>
+            <option value="1">Bolgarki</option>
+            <option value="2">Lobziki</option>
+            <option value="3">Frezeri</option>
         </select>
     </div>
     <div class="currency_container">
@@ -36,7 +36,7 @@
         </iframe>
     </div>
 </div>
-
+<div class="products">
 <c:forEach items="${paginationProducts}" var="prodInfo">
     <div class="product-preview-container">
         <ul>
@@ -52,9 +52,12 @@
             <li>Weight: <fmt:formatNumber value="${prodInfo.weight}" type="number"/> Gr</li>
             <li>Power: <fmt:formatNumber value="${prodInfo.power}" type="number"/> W</li>
             <li>Speed: <fmt:formatNumber value="${prodInfo.speed}" type="number"/> Ob/min</li>
+
+            <security:authorize access="!hasRole('ROLE_MANAGER')">
             <li><a
                     href="${pageContext.request.contextPath}/buyProduct?toolsId=${prodInfo.toolsId}">
                 Buy Now</a></li>
+            </security:authorize>
             <!-- For Manager edit Product -->
             <security:authorize access="hasRole('ROLE_MANAGER')">
                 <li><a style="color:red;"
@@ -65,6 +68,7 @@
     </div>
 
 </c:forEach>
+</div>
 <div class="pagin">
 <c:if test="${page>0}">
     <a href="${pageContext.request.contextPath}/productList?page=${page-1}">Previous</a>
@@ -75,6 +79,9 @@
 </div>
 
 <jsp:include page="_footer.jsp"/>
+
+<script src="<c:url value="/js/lib/jquery-3.2.1.min.js"/>"></script>
+<script src="<c:url value="/js/productList.js"/>"></script>
 
 </body>
 </html>

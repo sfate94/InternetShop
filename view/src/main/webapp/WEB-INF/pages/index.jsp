@@ -24,6 +24,7 @@
     </ul>
 </div>
 
+<img src="/images/image1.jpg" >
 
 <jsp:include page="_footer.jsp" />
 

@@ -33,6 +33,13 @@ public class ToolsDAOImpl implements ToolsDAO {
     }
 
     @Override
+    public List<Tools> getToolsByTypeId(String typeId) {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria crit = session.createCriteria(Tools.class);
+        return (List<Tools>)crit.list();
+    }
+
+    @Override
     public ToolsInfo findToolsInfo(String toolsId) {
         Tools tools = this.findTools(toolsId);
         if (tools == null) {
@@ -83,6 +90,8 @@ public class ToolsDAOImpl implements ToolsDAO {
     public Long getCount() {
         return (Long) sessionFactory.getCurrentSession().createCriteria(Tools.class).setProjection(Projections.rowCount()).uniqueResult();
     }
+
+
 
     @Override
     public List<Tools> queryTools(int page, int maxResult) {

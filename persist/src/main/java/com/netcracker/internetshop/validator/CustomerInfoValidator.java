@@ -2,6 +2,7 @@ package com.netcracker.internetshop.validator;
 
 import com.netcracker.internetshop.models.CustomerInfo;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -11,6 +12,7 @@ import org.springframework.validation.Validator;
 public class CustomerInfoValidator implements Validator {
 
     private EmailValidator emailValidator = EmailValidator.getInstance();
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
     @Override
     public boolean supports(Class<?> clazz) {
         return clazz == CustomerInfo.class;

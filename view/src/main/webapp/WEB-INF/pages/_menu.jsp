@@ -12,10 +12,13 @@
         Product List
     </a>
     |
+    <security:authorize  access="!hasRole('ROLE_MANAGER')">
     <a href="${pageContext.request.contextPath}/shoppingCart">
         My Cart
     </a>
     |
+    </security:authorize>
+
     <security:authorize  access="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
         <a href="${pageContext.request.contextPath}/orderList">
             Order List

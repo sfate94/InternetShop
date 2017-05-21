@@ -116,8 +116,8 @@
         <tr>
             <td>&nbsp;</td>
             <td><input type="submit" value="Submit" />
-               <form action="/productList/">
-                    <button type="submit">Cancel</button>
+                <form>
+                    <input type="button" value="Cancel" onclick="location.href='${pageContext.request.contextPath}/productList'">
                 </form>
             </td>
 

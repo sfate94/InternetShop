@@ -1,29 +1,21 @@
 package com.netcracker.internetshop.controller.adminController;
 
-
 import com.netcracker.internetshop.dao.OrderDAO;
-
 import com.netcracker.internetshop.models.*;
-import com.netcracker.internetshop.validator.ProductInfoValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
-
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import java.util.List;
 
 @Controller
-public class OrderController {
+public class Order {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Product.class);
 
 
     @Autowired
@@ -32,8 +24,7 @@ public class OrderController {
 
 
     @RequestMapping(value = {"/orderList"}, method = RequestMethod.GET)
-    public String orderList(Model model, //
-                            @RequestParam(value = "page", defaultValue = "1") String pageStr) {
+    public String orderList(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
         int page = 1;
         try {
             page = Integer.parseInt(pageStr);
@@ -43,6 +34,9 @@ public class OrderController {
         final int MAX_RESULT = 5;
         final int MAX_NAVIGATION_PAGE = 10;
 
+        //извлечь изспринг секюрити контекста айди пользователя и роль
+        //если админ, то ваш код
+        //если покупатель, то написать новый метод дао с доп параметром - айди или емэйл покупателя
         PaginationResult<OrderInfo> paginationResult //
                 = orderDAO.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
 

@@ -18,4 +18,5 @@ public interface ToolsDAO {
 
     Long getCount();
 
+    List<Tools> getToolsByTypeId(String typeId);
 }

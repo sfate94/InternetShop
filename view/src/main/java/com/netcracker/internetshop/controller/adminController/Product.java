@@ -34,9 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class ProductController {
+public class Product {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Product.class);
 
     @Autowired
     @Qualifier("productDAO")
@@ -113,7 +113,7 @@ public class ProductController {
 
     @RequestMapping(value = {"models"}, method = RequestMethod.GET)
     public void product(HttpServletResponse response, @RequestParam(value = "typeId", defaultValue = "") String typeId) {
-        try(Writer writer = response.getWriter()) {
+        try (Writer writer = response.getWriter()) {
             Gson gson = new Gson();
             writer.append(gson.toJson(getModels(typeId)));
         } catch (IOException e) {
@@ -123,7 +123,6 @@ public class ProductController {
 
     // POST: Save product  "/product/{id}"
     @RequestMapping(value = {"/product"}, method = RequestMethod.POST)
-    // Avoid UnexpectedRollbackException (See more explanations)
     @Transactional(propagation = Propagation.NEVER)
     public String productSave(Model model, //
                               @ModelAttribute("productForm") @Validated ToolsInfo toolsInfo, //

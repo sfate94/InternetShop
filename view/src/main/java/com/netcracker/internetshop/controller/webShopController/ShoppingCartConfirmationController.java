@@ -45,7 +45,6 @@ public class ShoppingCartConfirmationController {
 
     // POST: Send Cart (Save).
     @RequestMapping(value = {"/shoppingCartConfirmation"}, method = RequestMethod.POST)
-    // Avoid UnexpectedRollbackException (See more explanations)
     @Transactional(propagation = Propagation.NEVER)
     public String shoppingCartConfirmationSave(HttpServletRequest request, Model model) {
         CartInfo cartInfo = Utils.getCartInSession(request);
