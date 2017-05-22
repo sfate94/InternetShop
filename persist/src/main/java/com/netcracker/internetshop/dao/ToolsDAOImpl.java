@@ -33,13 +33,6 @@ public class ToolsDAOImpl implements ToolsDAO {
     }
 
     @Override
-    public List<Tools> getToolsByTypeId(String typeId) {
-        Session session = sessionFactory.getCurrentSession();
-        Criteria crit = session.createCriteria(Tools.class);
-        return (List<Tools>)crit.list();
-    }
-
-    @Override
     public ToolsInfo findToolsInfo(String toolsId) {
         Tools tools = this.findTools(toolsId);
         if (tools == null) {
@@ -91,34 +84,27 @@ public class ToolsDAOImpl implements ToolsDAO {
         return (Long) sessionFactory.getCurrentSession().createCriteria(Tools.class).setProjection(Projections.rowCount()).uniqueResult();
     }
 
-
+    @Override
+    public Long getCountByTypeId(String typeId) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Tools.class);
+        criteria.add(Restrictions.eq("typeTools.typeId", typeId));
+        return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+    }
 
     @Override
     public List<Tools> queryTools(int page, int maxResult) {
-        String sql = "select t.Tools_ID, t.Cost, t.Length, t.Weight, t.Height, t.Power, t.Speed, m.Model_Name, tt.TypeName, t.Image from tools t, model m, type_tools tt where t.Model_ID = m.Model_ID && t.Type_ID = tt.Type_ID limit ?,?;";
-        Query query = sessionFactory.getCurrentSession().createSQLQuery(sql);
-        query.setParameter(0, page*maxResult);
-        query.setParameter(1, maxResult);
-        List<Object[]> result = query.list();
-        List<Tools> toolsList = new ArrayList<>();
-        for (Object[] array : result) {
-            Tools tools = new Tools();
-            tools.setToolsId((String) array[0]);
-            tools.setCost((Integer) array[1]);
-            tools.setLength((Integer) array[2]);
-            tools.setWeight((Integer) array[3]);
-            tools.setHeight((Integer) array[4]);
-            tools.setPower((Integer) array[5]);
-            tools.setSpeed((Integer) array[6]);
-            Model model = new Model();
-            model.setModelName((String) array[7]);
-            tools.setModel(model);
-            TypeTools typeTools = new TypeTools();
-            typeTools.setTypeName((String) array[8]);
-            tools.setTypeTools(typeTools);
-            tools.setImage((byte[]) array[9]);
-            toolsList.add(tools);
-        }
-        return toolsList;
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Tools.class);
+        criteria.setFirstResult(page*maxResult);
+        criteria.setMaxResults(maxResult);
+        return (List<Tools>)criteria.list();
+    }
+
+    @Override
+    public List<Tools> queryToolsByTypeId(int page, int maxResult, String typeId) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Tools.class);
+        criteria.add(Restrictions.eq("typeTools.typeId", typeId));
+        criteria.setFirstResult(page*maxResult);
+        criteria.setMaxResults(maxResult);
+        return (List<Tools>)criteria.list();
     }
 }

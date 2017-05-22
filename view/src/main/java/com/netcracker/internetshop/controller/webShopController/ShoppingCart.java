@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/")
-public class ShoppingCartController {
+public class ShoppingCart {
 
     @Autowired
     @Qualifier("productDAO")

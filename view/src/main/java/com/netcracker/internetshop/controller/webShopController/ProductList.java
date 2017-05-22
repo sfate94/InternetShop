@@ -1,9 +1,10 @@
 package com.netcracker.internetshop.controller.webShopController;
 
-import com.google.gson.Gson;
 import com.netcracker.internetshop.dao.ToolsDAO;
+import com.netcracker.internetshop.dao.TypeDAO;
 import com.netcracker.internetshop.entity.catalog.Tools;
 import com.netcracker.internetshop.models.ToolsInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,48 +16,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class ProductListController {
+public class ProductList {
 
     @Autowired
     @Qualifier("productDAO")
     private ToolsDAO toolsDAO;
 
-    @RequestMapping(value = {"productList"}, method = RequestMethod.GET)
+    @Autowired
+    @Qualifier("typeDAO")
+    private TypeDAO typeDAO;
 
+    @RequestMapping(value = {"productList"}, method = RequestMethod.GET)
     public String listProductHandler(Model model,
                                      @RequestParam(value = "page", defaultValue = "0") int page,
                                      @RequestParam(value = "typeId", required = false) String typeId,
-                                     @RequestParam(value = "maxResult", defaultValue = "6") int maxResult) {
+                                     @RequestParam(value = "maxResult", defaultValue = "3") int maxResult) {
+        List<Tools> result = StringUtils.isEmpty(typeId) ? toolsDAO.queryTools(page, maxResult) : toolsDAO.queryToolsByTypeId(page, maxResult, typeId);
+        model.addAttribute("count", StringUtils.isEmpty(typeId) ? toolsDAO.getCount().intValue() : toolsDAO.getCountByTypeId(typeId));
+        model.addAttribute("typeId", typeId);
+        model.addAttribute("tools", convertResultToModel(result));
+        model.addAttribute("page", page);
+        model.addAttribute("maxResult", maxResult);
+        if (typeId == null) model.addAttribute("types", typeDAO.getTypeTools());
+        return typeId == null ? "catalog" : "products";
+    }
 
-        List<Tools> result = new ArrayList<Tools>();
-        if (typeId != null) {
-            List<Tools> res = toolsDAO.getToolsByTypeId(typeId);
-            for(Tools tools: res){
-                if (tools.getTypeTools().getTypeId().equals(typeId)){
-                    result.add(tools);
-                }
-            }
-        } else {
-            result = toolsDAO.queryTools(page, maxResult);
-        }
-        int count = toolsDAO.getCount().intValue();
+    private List<ToolsInfo> convertResultToModel(List<Tools> result) {
         List<ToolsInfo> toolsInfos = new ArrayList<>();
         for (Tools tools : result) {
             ToolsInfo tool = new ToolsInfo(tools);
             toolsInfos.add(tool);
         }
-        model.addAttribute("tools", toolsInfos);
-        model.addAttribute("paginationProducts", toolsInfos);
-        model.addAttribute("page", page);
-        model.addAttribute("maxResult", maxResult);
-        model.addAttribute("count", count);
-        return "productList";
+        return toolsInfos;
     }
 
     @RequestMapping(value = {"/productImage"}, method = RequestMethod.GET)

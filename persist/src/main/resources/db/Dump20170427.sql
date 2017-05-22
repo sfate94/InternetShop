@@ -113,7 +113,7 @@ CREATE TABLE `orders` (
   `Customer_Email` varchar(128) NOT NULL,
   `Customer_Name` varchar(255) NOT NULL,
   `Customer_Phone` varchar(128) NOT NULL,
-  `Order_Date` datetime(6) NOT NULL,
+  `Order_Date` datetime NOT NULL ,
   `Order_Num` int(10) unsigned NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;

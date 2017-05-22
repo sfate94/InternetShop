@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class ShoppingCartConfirmationController {
+public class ShoppingCartConfirmation {
 
     @Autowired
     @Qualifier("productDAO")
@@ -31,7 +31,6 @@ public class ShoppingCartConfirmationController {
     public String shoppingCartConfirmationReview(HttpServletRequest request, Model model) {
         CartInfo cartInfo = Utils.getCartInSession(request);
 
-        // Cart have no products.
         if (cartInfo.isEmpty()) {
             // Redirect to shoppingCart page.
             return "redirect:/shoppingCart";
@@ -49,7 +48,6 @@ public class ShoppingCartConfirmationController {
     public String shoppingCartConfirmationSave(HttpServletRequest request, Model model) {
         CartInfo cartInfo = Utils.getCartInSession(request);
 
-        // Cart have no products.
         if (cartInfo.isEmpty()) {
             // Redirect to shoppingCart page.
             return "redirect:/shoppingCart";

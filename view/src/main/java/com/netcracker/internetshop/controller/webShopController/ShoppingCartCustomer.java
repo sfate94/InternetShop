@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/")
-public class ShoppingCartCustomerController {
+public class ShoppingCartCustomer {
 
     @Autowired
     @Qualifier("customerInfoValidator")
