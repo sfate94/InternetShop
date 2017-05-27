@@ -13,6 +13,8 @@ public interface OrderDAO {
 
     public PaginationResult<OrderInfo> listOrderInfo(int page, int maxResult, int maxNavigationPage);
 
+    public PaginationResult<OrderInfo> listOrderInfo(String userName, int page, int maxResult, int maxNavigationPage);
+
     public OrderInfo getOrderInfo(String orderId);
 
     public List<OrderDetailInfo> listOrderDetailInfos(String orderId);

@@ -5,18 +5,15 @@ import com.netcracker.internetshop.dao.ToolsDAO;
 import com.netcracker.internetshop.dao.Utils;
 import com.netcracker.internetshop.entity.catalog.Tools;
 import com.netcracker.internetshop.models.CartInfo;
-
 import com.netcracker.internetshop.models.ToolsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -76,25 +73,18 @@ public class ShoppingCart {
 
     // POST: Update quantity of products in cart.
     @RequestMapping(value = {"/shoppingCart"}, method = RequestMethod.POST)
-    public String shoppingCartUpdateQty(HttpServletRequest request, //
-                                        Model model, //
-                                        @ModelAttribute("cartForm") CartInfo cartForm) {
-
+    public String shoppingCartUpdateQty(HttpServletRequest request, Model model, @ModelAttribute("cartForm") CartInfo cartForm) {
         CartInfo cartInfo = Utils.getCartInSession(request);
         cartInfo.updateQuantity(cartForm);
-
-        // Redirect to shoppingCart page.
-        return "redirect:/shoppingCart";
+        model.addAttribute("cartForm", cartInfo);
+        return "cartLines";
     }
 
     // GET: Show Cart
     @RequestMapping(value = {"/shoppingCart"}, method = RequestMethod.GET)
     public String shoppingCartHandler(HttpServletRequest request, Model model) {
         CartInfo myCart = Utils.getCartInSession(request);
-
         model.addAttribute("cartForm", myCart);
         return "shoppingCart";
     }
-
-
 }

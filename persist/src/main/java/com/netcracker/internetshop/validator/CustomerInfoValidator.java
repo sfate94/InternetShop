@@ -8,11 +8,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.lang.annotation.Target;
+
 @Component("customerInfoValidator")
 public class CustomerInfoValidator implements Validator {
 
     private EmailValidator emailValidator = EmailValidator.getInstance();
-    @NumberFormat(style = NumberFormat.Style.NUMBER)
+
     @Override
     public boolean supports(Class<?> clazz) {
         return clazz == CustomerInfo.class;
@@ -29,6 +31,10 @@ public class CustomerInfoValidator implements Validator {
 
         if (!emailValidator.isValid(custInfo.getEmail())) {
             errors.rejectValue("email", "Pattern.customerForm.email");
+        }
+        String phone = ((CustomerInfo)custInfo).getPhone();
+        if (phone.length() != 15) {
+            errors.rejectValue("phone", "phone.tooshort", "Phone must be at least 15 characters.");
         }
     }
 

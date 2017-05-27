@@ -66,37 +66,37 @@
 
         <tr>
             <td>Cost *</td>
-            <td><form:input path="cost" /></td>
+            <td><form:input path="cost" type="number"/></td>
             <td><form:errors path="cost" class="error-message" /></td>
         </tr>
 
         <tr>
             <td>Height *</td>
-            <td><form:input path="height" /></td>
+            <td><form:input path="height" type="number"/></td>
             <td><form:errors path="height" class="error-message" /></td>
         </tr>
 
         <tr>
             <td>Weight *</td>
-            <td><form:input path="weight" /></td>
+            <td><form:input path="weight" type="number"/></td>
             <td><form:errors path="weight" class="error-message" /></td>
         </tr>
 
         <tr>
             <td>Length *</td>
-            <td><form:input path="length" /></td>
+            <td><form:input path="length" type="number"/></td>
             <td><form:errors path="length" class="error-message" /></td>
         </tr>
 
         <tr>
             <td>Power *</td>
-            <td><form:input path="power" /></td>
+            <td><form:input path="power" type="number"/></td>
             <td><form:errors path="power" class="error-message" /></td>
         </tr>
 
         <tr>
             <td>Speed *</td>
-            <td><form:input path="speed" /></td>
+            <td><form:input path="speed" type="number"/></td>
             <td><form:errors path="speed" class="error-message" /></td>
         </tr>
 

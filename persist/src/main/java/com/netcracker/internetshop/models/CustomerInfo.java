@@ -1,14 +1,24 @@
 package com.netcracker.internetshop.models;
 
+import com.netcracker.internetshop.entity.account.Account;
+
 public class CustomerInfo {
 
     private String name;
     private String address;
     private String email;
     private String phone;
-
     private boolean valid;
 
+    public CustomerInfo() {
+    }
+
+    public CustomerInfo(Account account) {
+        this.name = account.getUserName();
+        this.phone = account.getPhone();
+        this.email = account.getEmail();
+        this.address = account.getAddress();
+    }
 
     public String getName() {
         return name;

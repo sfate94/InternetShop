@@ -90,7 +90,7 @@ public class Order implements Serializable {
         this.customerEmail = customerEmail;
     }
 
-    @Column(name = "Customer_Phone", length = 128, nullable = false)
+    @Column(name = "Customer_Phone", length = 15, nullable = false)
     public String getCustomerPhone() {
         return customerPhone;
     }

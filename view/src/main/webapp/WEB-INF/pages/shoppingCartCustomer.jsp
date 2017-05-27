@@ -24,25 +24,25 @@
     <table>
         <tr>
             <td>Name *</td>
-            <td><form:input path="name" /></td>
+            <td><form:input path="name" value="${customerInfo.name}"/></td>
             <td><form:errors path="name" class="error-message" /></td>
         </tr>
 
         <tr>
             <td>Email *</td>
-            <td><form:input path="email" /></td>
+            <td><form:input path="email" value="${customerInfo.email}"/></td>
             <td><form:errors path="email" class="error-message" /></td>
         </tr>
 
         <tr>
             <td>Phone *</td>
-            <td><form:input path="phone" id="form_1" /></td>
+            <td><form:input path="phone" id="phoneNumber" value="${customerInfo.phone}"/></td>
             <td><form:errors path="phone" class="error-message" /></td>
         </tr>
 
         <tr>
             <td>Address *</td>
-            <td><form:input path="address" /></td>
+            <td><form:input path="address" value="${customerInfo.address}"/></td>
             <td><form:errors path="address" class="error-message" /></td>
         </tr>
 
@@ -58,8 +58,7 @@
 
 <jsp:include page="_footer.jsp" />
 <script src="<c:url value="/js/lib/jquery-3.2.1.min.js"/>"></script>
-<script src="<c:url value="/js/productValidator.js"/>"></script>
-
-
+<script src="<c:url value="/js/lib/jquery.maskedinput.min.js"/>"></script>
+<script src="<c:url value="/js/cartCustomer.js"/>"></script>
 </body>
 </html>

@@ -24,8 +24,8 @@
 
     <ul>
         <li>User Name: ${pageContext.request.userPrincipal.name}</li>
-        <li>Role:
-            <ul>
+        <li class="roles_container">Role:
+            <ul class="roles" ">
                 <c:forEach items="${userDetails.authorities}" var="auth">
                     <li>${auth.authority }</li>
                 </c:forEach>

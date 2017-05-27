@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +37,17 @@ public class Order {
         final int MAX_RESULT = 5;
         final int MAX_NAVIGATION_PAGE = 10;
 
-        //извлечь изспринг секюрити контекста айди пользователя и роль
-        //если админ, то ваш код
-        //если покупатель, то написать новый метод дао с доп параметром - айди или емэйл покупателя
-        PaginationResult<OrderInfo> paginationResult //
-                = orderDAO.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+        PaginationResult<OrderInfo> paginationResult = null;
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        for (GrantedAuthority authority : userDetails.getAuthorities()) {
+            if (authority.getAuthority().equals("ROLE_MANAGER")) {
+                paginationResult = orderDAO.listOrderInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+                break;
+            }
+        }
+        if (paginationResult == null) {
+            paginationResult = orderDAO.listOrderInfo(userDetails.getUsername(), page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+        }
 
         model.addAttribute("paginationResult", paginationResult);
         return "orderList";

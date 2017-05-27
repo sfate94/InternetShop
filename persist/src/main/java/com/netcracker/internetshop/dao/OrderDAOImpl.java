@@ -93,6 +93,21 @@ public class OrderDAOImpl implements OrderDAO {
         return new PaginationResult<OrderInfo>(query, page, maxResult, maxNavigationPage);
     }
 
+    @Override
+    public PaginationResult<OrderInfo> listOrderInfo(String userName, int page, int maxResult, int maxNavigationPage) {
+        String sql = "Select new " + OrderInfo.class.getName()
+                + "(ord.id, ord.orderDate, ord.orderNum, ord.amount, "
+                + " ord.customerName, ord.customerAddress, ord.customerEmail, ord.customerPhone) " + " from "
+                + Order.class.getName() + " ord where ord.customerName=?"
+                + " order by ord.orderNum desc";
+        Session session = this.sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery(sql);
+        query.setParameter(0, userName);
+
+        return new PaginationResult<OrderInfo>(query, page, maxResult, maxNavigationPage);
+    }
+
     public Order findOrder(String orderId) {
         Session session = sessionFactory.getCurrentSession();
         Criteria crit = session.createCriteria(Order.class);

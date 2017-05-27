@@ -19,6 +19,9 @@ import javax.persistence.Table;
 
         private String userName;
         private String password;
+        private String email;
+        private String phone;
+        private String address;
         private boolean active;
         private String userRole;
 
@@ -57,6 +60,33 @@ import javax.persistence.Table;
 
         public void setUserRole(String userRole) {
             this.userRole = userRole;
+        }
+
+        @Column(name = "Email", length = 30)
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        @Column(name = "Phone", length = 15)
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        @Column(name = "Address", length = 50)
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
         }
 
         @Override

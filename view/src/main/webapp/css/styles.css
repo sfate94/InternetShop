@@ -160,3 +160,11 @@ table td {
 .paging {
     text-align: center;
 }
+
+.roles_container {
+    display: block;
+}
+
+.roles {
+    display: inline-block;
+}

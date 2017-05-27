@@ -1,11 +1,16 @@
 package com.netcracker.internetshop.controller.webShopController;
 
+import com.netcracker.internetshop.dao.AccountDAO;
 import com.netcracker.internetshop.dao.Utils;
+import com.netcracker.internetshop.entity.account.Account;
 import com.netcracker.internetshop.models.CartInfo;
 import com.netcracker.internetshop.models.CustomerInfo;
 import com.netcracker.internetshop.validator.CustomerInfoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +31,10 @@ public class ShoppingCartCustomer {
     @Autowired
     @Qualifier("customerInfoValidator")
     private CustomerInfoValidator customerInfoValidator;
+
+    @Autowired
+    @Qualifier("accountDAO")
+    private AccountDAO accountDAO;
 
     @InitBinder
     public void myInitBinder(WebDataBinder dataBinder) {
@@ -53,9 +62,13 @@ public class ShoppingCartCustomer {
             // Redirect to shoppingCart page.
             return "redirect:/shoppingCart";
         }
-
         CustomerInfo customerInfo = cartInfo.getCustomerInfo();
-        if (customerInfo == null) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = authentication.getPrincipal() instanceof UserDetails ? (UserDetails) authentication.getPrincipal() : null;
+        if (customerInfo == null && userDetails != null) {
+            Account account = accountDAO.findAccount(userDetails.getUsername());
+            customerInfo = new CustomerInfo(account);
+        } else {
             customerInfo = new CustomerInfo();
         }
 
